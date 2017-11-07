@@ -133,6 +133,10 @@ var AppController = function(loadingParams) {
       if (this.loadingParams_.bypassJoinConfirmation) {
         $(UI_CONSTANTS.confirmJoinButton).onclick();
       }
+      if (this.loadingParams_.localVideo === 'false') {
+        this.hide_(this.localVideo_)
+        this.hide_(this.miniVideo_)
+      }
     } else {
       // Display the room selection UI.
       this.showRoomSelection_();
@@ -566,6 +570,7 @@ AppController.prototype.loadUrlParams_ = function() {
   this.loadingParams_.videoRecvBitrate = urlParams['vrbr'];
   this.loadingParams_.videoRecvCodec = urlParams['vrc'] || DEFAULT_VIDEO_CODEC;
   this.loadingParams_.videoFec = urlParams['videofec'];
+  this.loadingParams_.localVideo = urlParams['video'];
   /* eslint-enable dot-notation */
 };
 
