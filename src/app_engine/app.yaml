@@ -51,7 +51,7 @@ libraries:
   version: latest
 
 env_variables:
-  BYPASS_JOIN_CONFIRMATION: false
+  BYPASS_JOIN_CONFIRMATION: true
   # Only change these while developing, do not commit to source!
   # Use appcfg.py --env_variable=CALLSTATS_APP_ID:ID  \
   #               --env_variable=CALLSTATS_APP_SECRET:SECRET \

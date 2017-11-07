@@ -20,24 +20,24 @@ LOOPBACK_CLIENT_ID = 'LOOPBACK_CLIENT_ID'
 
 # Turn/Stun server override. This allows AppRTC to connect to turn servers
 # directly rather than retrieving them from an ICE server provider.
-TURN_SERVER_OVERRIDE = []
+# TURN_SERVER_OVERRIDE = []
 # Enable by uncomment below and comment out above, then specify turn and stun
 # servers below.
-# TURN_SERVER_OVERRIDE = [
-#   {
-#     "urls": [
-#       "turn:hostname/IpToTurnServer:19305?transport=udp",
+TURN_SERVER_OVERRIDE = [
+   {
+     "urls": [
+       "turn:35.188.60.34:3478?transport=udp",
 #       "turn:hostname/IpToTurnServer:19305?transport=tcp"
-#     ],
-#     "username": "TurnServerUsername",
-#     "credential": "TurnServerCredentials"
-#   },
+     ],
+     "username": "xxx",
+     "credential": "xxxxxxx"
+   },
 #   {
 #     "urls": [
-#       "stun:hostname/IpToStunServer:19302"
+#       "stun:stun:l.google.com:19302"
 #     ]
 #   }
-# ]
+ ]
 
 # TODO(jansson): Remove once AppRTCDemo on iOS supports ICE_SERVER.
 TURN_BASE_URL = 'https://computeengineondemand.appspot.com'
@@ -58,6 +58,8 @@ WSS_INSTANCE_HOST_KEY = 'host_port_pair'
 WSS_INSTANCE_NAME_KEY = 'vm_name'
 WSS_INSTANCE_ZONE_KEY = 'zone'
 WSS_INSTANCES = [{
+    WSS_INSTANCE_HOST_KEY: '35.188.60.34:8089'
+},  {
     WSS_INSTANCE_HOST_KEY: 'apprtc-ws.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-a'
