@@ -341,6 +341,7 @@ InfoBox.prototype.buildStatsSection_ = function() {
       txVideo.frameHeight !== 0) {
     rxVideoCodec = rxVideo.mimeType;
     rxVideoHeight = rxVideo.frameHeight;
+    rxVideoWidth = rxVideo.frameWidth;
     rxVideoPlType = rxVideo.payloadType;
     rxVideoDroppedFrames = rxVideo.framesDropped;
     rxVideoPliCount = rxVideo.pliCount;
@@ -351,7 +352,8 @@ InfoBox.prototype.buildStatsSection_ = function() {
     rxVideoBitrate = computeBitrate(rxVideo, rxPrevVideo, 'bytesReceived');
     rxVideoPacketRate = computeRate(rxVideo, rxPrevVideo, 'packetsReceived');
     contents += this.buildLine_('Video Rx',
-        rxVideoCodec + '/' + rxVideoPlType + ', ' + rxVideoHeight.toString() +
+        rxVideoCodec + '/' + rxVideoPlType + ', ' + 
+        rxVideoWidth.toString() + 'x' + rxVideoHeight.toString() +
         'p' + rxVideoFps.toString() + ', ' +
         'firCount ' + rxVideoFirCount + ', ' +
         'pliCount ' + rxVideoPliCount + ', ' +
