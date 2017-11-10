@@ -84,10 +84,30 @@ def make_media_track_constraints(constraints_string):
 
   return track_constraints
 
+def add_media_track_constraint_v2(track_constraints, constraint_string):
+  tokens = constraint_string.split(':')
+  tokens = tokens[-1].split('=')
+  if len(tokens) == 2:
+    track_constraints[tokens[0]] = tokens[1]
+  else:
+    logging.error('Ignoring malformed constraint: ' + constraint_string)
+
+def make_media_track_constraints_v2(constraints_string):
+  if not constraints_string or constraints_string.lower() == 'true':
+    track_constraints = True
+  elif constraints_string.lower() == 'false':
+    track_constraints = False
+  else:
+    track_constraints = {}
+    for constraint_string in constraints_string.split(','):
+      add_media_track_constraint_v2(track_constraints, constraint_string)
+
+  return track_constraints
+
 def make_media_stream_constraints(audio, video, firefox_fake_device):
   stream_constraints = (
-      {'audio': make_media_track_constraints(audio),
-       'video': make_media_track_constraints(video)})
+      {'audio': make_media_track_constraints_v2(audio),
+       'video': make_media_track_constraints_forvideo_v2(video)})
   if firefox_fake_device:
     stream_constraints['fake'] = True
   logging.info('Applying media constraints: ' + str(stream_constraints))
@@ -262,7 +282,7 @@ def get_room_parameters(request, room_id, client_id, is_initiator):
     include_loopback_js = '<script src="/js/loopback.js"></script>'
   else:
     include_loopback_js = ''
-  
+
   include_rtstats_js = ''
   if str(os.environ.get('WITH_RTSTATS')) != 'none' or \
     (os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') and \
